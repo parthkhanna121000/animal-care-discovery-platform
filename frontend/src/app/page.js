@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 // Flip to true once the /studio route exists. Until then its card is not a link.
-const STUDIO_READY = false;
+const STUDIO_READY = true;
 
 /* ---------- CSS-only previews (illustrative, not screenshots) ---------- */
 
