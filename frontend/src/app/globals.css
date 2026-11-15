@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-heading: var(--font-manrope);
+  --font-sans: var(--font-inter);
+
+  /* Practo for Animals */
+  --color-forest: #174c3c;
+  --color-green: #287a5a;
+  --color-sage: #eaf2ec;
+  --color-ivory: #faf9f5;
+  --color-ink: #17231e;
+  --color-muted: #68756e;
+  --color-line: #e4e8e3;
+  --color-amber: #f2b66d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
