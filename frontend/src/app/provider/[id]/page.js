@@ -2,8 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin, Phone, Flag } from "lucide-react";
 import Navbar from "@/features/animals/Navbar";
+import Footer from "@/features/animals/Footer";
 import { providers } from "@/data/providers";
 import { categories } from "@/data/categories";
+
+// Tells Next.js which provider ids exist, so the page can be prerendered
+export function generateStaticParams() {
+  return providers.map((p) => ({ id: p.id }));
+}
 
 export default async function ProviderPage({ params }) {
   const { id } = await params;
@@ -42,18 +48,19 @@ export default async function ProviderPage({ params }) {
           >
             <Phone size={16} /> {provider.phone}
           </a>
-          <a
-            href={`mailto:corrections@example.com?subject=Correction for ${encodeURIComponent(provider.name)}`}
+          <Link
+            href="/correction"
             className="flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-semibold text-muted hover:border-forest hover:text-forest"
           >
             <Flag size={16} /> Submit a correction
-          </a>
+          </Link>
         </div>
 
         <p className="mt-8 rounded-lg bg-sage px-4 py-2 text-xs text-forest">
           Demonstration listing. Not a verified real provider.
         </p>
       </main>
+      <Footer />
     </>
   );
 }
