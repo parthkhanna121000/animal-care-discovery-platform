@@ -4,7 +4,7 @@ import { categories } from "@/data/categories";
 import { allFacilities } from "@/data/providers";
 
 const fieldClass =
-  "w-full rounded-lg border border-line bg-white px-3 py-2 text-sm outline-none focus:border-green";
+  "w-full rounded-lg border border-line bg-white px-3 py-2 text-sm outline-none transition-colors duration-150 focus:border-green focus:ring-2 focus:ring-green/20";
 
 export default function FilterPanel({ filters, setFilters, onReset }) {
   function update(key, value) {
@@ -89,7 +89,11 @@ export default function FilterPanel({ filters, setFilters, onReset }) {
         </select>
       </div>
 
-      <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold">
+      <label
+        className={`flex cursor-pointer items-center gap-2 text-sm font-semibold transition-colors duration-150 hover:text-forest ${
+          filters.emergency ? "text-forest" : ""
+        }`}
+      >
         <input
           type="checkbox"
           checked={filters.emergency}
@@ -102,17 +106,25 @@ export default function FilterPanel({ filters, setFilters, onReset }) {
       <fieldset>
         <legend className="mb-2 text-sm font-semibold">Facilities</legend>
         <div className="space-y-2">
-          {allFacilities.map((f) => (
-            <label key={f} className="flex cursor-pointer items-center gap-2 text-sm text-muted">
-              <input
-                type="checkbox"
-                checked={filters.facilities.includes(f)}
-                onChange={() => toggleFacility(f)}
-                className="h-4 w-4 accent-[#287a5a]"
-              />
-              {f}
-            </label>
-          ))}
+          {allFacilities.map((f) => {
+            const checked = filters.facilities.includes(f);
+            return (
+              <label
+                key={f}
+                className={`flex cursor-pointer items-center gap-2 text-sm transition-colors duration-150 hover:text-forest ${
+                  checked ? "font-medium text-forest" : "text-muted"
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => toggleFacility(f)}
+                  className="h-4 w-4 accent-[#287a5a]"
+                />
+                {f}
+              </label>
+            );
+          })}
         </div>
       </fieldset>
 

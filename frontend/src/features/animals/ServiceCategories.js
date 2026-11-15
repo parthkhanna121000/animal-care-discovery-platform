@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, PawPrint } from "lucide-react";
 import { categories } from "@/data/categories";
 
 // Bento layout: first card is large, last card spans the full row on desktop
@@ -30,13 +30,22 @@ export default function ServiceCategories() {
             <Link
               key={c.slug}
               href={`/search?category=${c.slug}`}
-              className={`group flex flex-col justify-between rounded-2xl border border-line p-6 transition hover:-translate-y-0.5 hover:border-green hover:shadow-md ${
-                featured ? "bg-forest text-white" : "bg-white"
+              style={{ animationDelay: `${i * 40}ms` }}
+              className={`animate-fade-up group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-line p-6 transition duration-200 ease-out hover:border-green hover:shadow-md motion-safe:hover:-translate-y-0.5 ${
+                featured ? "bg-forest text-white" : "bg-white hover:bg-sage/60"
               } ${spans[i]}`}
             >
-              <div className="flex items-start justify-between">
+              {featured && (
+                <PawPrint
+                  size={150}
+                  aria-hidden
+                  className="pointer-events-none absolute -bottom-8 -right-8 text-white/10 transition duration-300 motion-safe:group-hover:rotate-6 motion-safe:group-hover:scale-110"
+                />
+              )}
+
+              <div className="relative flex items-start justify-between">
                 <span
-                  className={`grid h-11 w-11 place-items-center rounded-xl ${
+                  className={`grid h-11 w-11 place-items-center rounded-xl transition duration-200 motion-safe:group-hover:-rotate-3 motion-safe:group-hover:scale-110 ${
                     featured ? "bg-white/15" : "bg-sage text-forest"
                   }`}
                 >
@@ -44,12 +53,12 @@ export default function ServiceCategories() {
                 </span>
                 <ArrowUpRight
                   size={18}
-                  className={`transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
+                  className={`transition duration-200 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5 ${
                     featured ? "text-white/70" : "text-muted"
                   }`}
                 />
               </div>
-              <div className={featured ? "mt-24" : "mt-8"}>
+              <div className={`relative ${featured ? "mt-24" : "mt-8"}`}>
                 <h3 className="font-heading text-lg font-bold">{c.title}</h3>
                 <p className={`mt-1 text-sm ${featured ? "text-white/75" : "text-muted"}`}>
                   {c.description}

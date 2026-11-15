@@ -2,11 +2,14 @@ import Link from "next/link";
 import { MapPin, Phone, Star, Siren } from "lucide-react";
 import { categories } from "@/data/categories";
 
-export default function ProviderCard({ provider }) {
+export default function ProviderCard({ provider, index = 0 }) {
   const category = categories.find((c) => c.slug === provider.category);
 
   return (
-    <article className="flex flex-col rounded-2xl border border-line bg-white p-5 transition hover:border-green hover:shadow-md">
+    <article
+      style={{ animationDelay: `${Math.min(index, 8) * 40}ms` }}
+      className="animate-fade-up flex flex-col rounded-2xl border border-line bg-white p-5 transition duration-200 ease-out hover:border-green hover:shadow-md motion-safe:hover:-translate-y-0.5"
+    >
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-green">
@@ -43,13 +46,13 @@ export default function ProviderCard({ provider }) {
       <div className="mt-5 flex gap-2 pt-1">
         <Link
           href={`/provider/${provider.id}`}
-          className="flex-1 rounded-full border border-forest px-4 py-2 text-center text-sm font-semibold text-forest transition hover:bg-sage active:scale-95"
+          className="flex-1 rounded-full border border-forest px-4 py-2 text-center text-sm font-semibold text-forest transition duration-150 hover:bg-sage active:scale-95"
         >
           View details
         </Link>
         <a
           href={`tel:${provider.phone.replace(/\s/g, "")}`}
-          className="flex flex-1 items-center justify-center gap-1.5 rounded-full bg-forest px-4 py-2 text-sm font-semibold text-white transition hover:bg-green active:scale-95"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-full bg-forest px-4 py-2 text-sm font-semibold text-white transition duration-150 hover:bg-green active:scale-95"
         >
           <Phone size={14} aria-hidden /> Call
         </a>

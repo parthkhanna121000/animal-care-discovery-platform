@@ -5,13 +5,19 @@ export default function Hero() {
   return (
     <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 lg:grid-cols-2 lg:py-20">
       <div>
-        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-green">
+        <p className="animate-fade-up mb-4 text-xs font-semibold uppercase tracking-widest text-green">
           Animal care discovery
         </p>
-        <h1 className="font-heading text-4xl font-extrabold leading-[1.05] tracking-tight text-forest sm:text-5xl lg:text-6xl">
+        <h1
+          style={{ animationDelay: "60ms" }}
+          className="animate-fade-up font-heading text-4xl font-extrabold leading-[1.05] tracking-tight text-forest sm:text-5xl lg:text-6xl"
+        >
           Better care for every paw, everywhere.
         </h1>
-        <p className="mt-5 max-w-md text-base leading-relaxed text-muted">
+        <p
+          style={{ animationDelay: "120ms" }}
+          className="animate-fade-up mt-5 max-w-md text-base leading-relaxed text-muted"
+        >
           Find vets, hospitals, boarding, diagnostics, ambulances and animal
           welfare organizations near you, all in one place.
         </p>
