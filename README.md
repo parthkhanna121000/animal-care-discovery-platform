@@ -1,9 +1,9 @@
 # Technical Assessment Submission
 ## Three Integrated Product Experiences
 
-**Live Application:** [Add deployed application URL]
+**Live Application:** https://animal-care-discovery-platform.vercel.app/
 
-**GitHub Repository:** [Add GitHub repository URL]
+**GitHub Repository:** https://github.com/parthkhanna121000/animal-care-discovery-platform
 
 This project brings together three product experiences in one integrated Next.js application:
 
