@@ -49,23 +49,29 @@ class GeminiError extends Error {
 }
 
 async function callGemini(payload, timeoutMs) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": process.env.GEMINI_API_KEY },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-      cache: "no-store",
-    });
-    if (!res.ok) throw new GeminiError(res.status);
-    return await res.json();
-  } finally {
-    clearTimeout(timer);
+  // Primary key first. The backup is used only if the primary key itself is rejected.
+  const keys = [process.env.GEMINI_API_KEY, process.env.GEMINI_API_KEY_BACKUP].filter(Boolean);
+  let lastStatus = 0;
+  for (const key of keys) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+        cache: "no-store",
+      });
+      if (res.ok) return await res.json();
+      lastStatus = res.status;
+      if (res.status !== 400 && res.status !== 401 && res.status !== 403) throw new GeminiError(res.status);
+    } finally {
+      clearTimeout(timer);
+    }
   }
+  throw new GeminiError(lastStatus || 401);
 }
-
 function firstText(data) {
   const parts = data && data.candidates && data.candidates[0] && data.candidates[0].content
     ? data.candidates[0].content.parts || []
