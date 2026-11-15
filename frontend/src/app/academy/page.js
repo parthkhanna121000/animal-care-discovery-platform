@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import AcademyHero from "@/features/academy/AcademyHero";
 import ProgrammeCards from "@/features/academy/ProgrammeCards";
 import LearningJourney from "@/features/academy/LearningJourney";
@@ -23,7 +23,7 @@ export default function AcademyPage() {
             href="/"
             className="text-sm font-medium text-graphite/70 hover:text-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet"
           >
-            Back to Practo for Animals
+            &larr; Assignment overview
           </Link>
         </div>
       </header>
