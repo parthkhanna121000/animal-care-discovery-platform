@@ -146,3 +146,8 @@ html {
 details.academy-faq summary { list-style: none; }
 details.academy-faq summary::-webkit-details-marker { display: none; }
 details.academy-faq[open] .academy-faq-icon { transform: rotate(45deg); }
+/* ---------- Assignment overview ---------- */
+/* Neutral focus ring on the overview page (unlayered, like the academy rule) */
+.overview :focus-visible {
+  outline-color: #191919;
+}
