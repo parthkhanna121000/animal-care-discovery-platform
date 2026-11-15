@@ -7,12 +7,12 @@ import { PawPrint, Menu, X } from "lucide-react";
 
 const links = [
   { label: "Find Care", href: "/search" },
-  { label: "Explore Services", href: "/#services" },
-  { label: "For Providers", href: "/#providers" },
-  { label: "About", href: "/#about" },
+  { label: "Explore Services", href: "/animals#services" },
+  { label: "For Providers", href: "/animals#providers" },
+  { label: "About", href: "/animals#about" },
 ];
 
-// Only real pages can be "active". Anchor links (/#services) stay neutral.
+// Only real pages can be "active". Anchor links (/animals#services) stay neutral.
 function isActive(href, pathname) {
   if (href === "/search") return pathname.startsWith("/search") || pathname.startsWith("/provider");
   return false;
@@ -57,7 +57,7 @@ export default function Navbar() {
         aria-label="Main"
         className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5"
       >
-        <Link href="/" className="group flex items-center gap-2 font-heading text-lg font-extrabold text-forest">
+        <Link href="/animals" className="group flex items-center gap-2 font-heading text-lg font-extrabold text-forest">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-forest text-white transition duration-200 motion-safe:group-hover:-rotate-6 motion-safe:group-hover:scale-110">
             <PawPrint size={18} />
           </span>
